@@ -1,0 +1,418 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f3eef9;
+    color: #33263d;
+}
+
+.app {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.titulo {
+    margin-bottom: 30px;
+    color: #5b3b73;
+    font-size: 2.2rem;
+    text-align: center;
+}
+
+.campo-busca {
+    width: 100%;
+    padding: 14px 18px;
+    margin-bottom: 25px;
+
+    border: 1px solid #cdb9d9;
+    border-radius: 10px;
+
+    background-color: #ffffff;
+    color: #44334d;
+
+    font-size: 1rem;
+
+    outline: none;
+
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.campo-busca::placeholder {
+    color: #9a8aa3;
+}
+
+.campo-busca:focus {
+    border-color: #9b78b5;
+    box-shadow: 0 0 0 3px rgba(155, 120, 181, 0.18);
+}
+
+.informacao {
+    margin: 10px 0;
+    color: #776781;
+}
+
+.carregando {
+    text-align: center;
+    color: #80629b;
+    font-size: 1.1rem;
+}
+
+.erro {
+    padding: 15px;
+    border-radius: 8px;
+
+    background-color: #f9e8ed;
+    border: 1px solid #e5aebd;
+
+    color: #9b4058;
+}
+
+.botao-novo-usuario {
+    padding: 11px 18px;
+    margin-bottom: 15px;
+
+    border: none;
+    border-radius: 9px;
+
+    background-color: #8b6aa8;
+    color: white;
+
+    font-size: 0.95rem;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.botao-novo-usuario:hover {
+    background-color: #75538f;
+    transform: translateY(-2px);
+}
+
+.lista-usuarios {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+    gap: 20px;
+
+    padding: 0;
+    margin: 25px 0 0;
+
+    list-style: none;
+}
+
+.card-usuario {
+    padding: 22px;
+
+    background: #ffffff;
+
+    border: 1px solid #ddcde5;
+    border-radius: 14px;
+
+    box-shadow: 0 6px 18px rgba(91, 59, 115, 0.10);
+
+    transition:
+        transform 0.2s,
+        border-color 0.2s,
+        box-shadow 0.2s;
+}
+
+.card-usuario:hover {
+    transform: translateY(-4px);
+
+    border-color: #a98abc;
+
+    box-shadow: 0 10px 25px rgba(91, 59, 115, 0.16);
+}
+
+.avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 55px;
+    height: 55px;
+
+    margin-bottom: 15px;
+
+    border-radius: 50%;
+
+    background: #9b7bb5;
+
+    color: #ffffff;
+
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.nome-usuario {
+    margin: 0 0 8px;
+
+    color: #513765;
+
+    font-size: 1.2rem;
+}
+
+.username {
+    margin: 0 0 15px;
+
+    color: #80619a;
+
+    font-size: 0.9rem;
+}
+
+.email {
+    margin: 0 0 18px;
+
+    color: #6e6275;
+
+    font-size: 0.95rem;
+}
+
+.card-usuario button {
+    padding: 9px 13px;
+    margin-right: 8px;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: #8d6aaa;
+    color: #ffffff;
+
+    font-size: 0.9rem;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s,
+        transform 0.2s;
+}
+
+.card-usuario button:hover {
+    background-color: #76548f;
+    transform: translateY(-1px);
+}
+
+.card-usuario button:last-child {
+    background-color: #a8cfae;
+    color: #31583a;
+}
+
+.card-usuario button:last-child:hover {
+    background-color: #8fbd97;
+}
+
+.sem-resultados {
+    margin-top: 30px;
+
+    padding: 25px;
+
+    text-align: center;
+
+    border: 1px dashed #b9a4c4;
+    border-radius: 10px;
+
+    color: #806f88;
+    background-color: #faf7fc;
+}
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+
+    background-color: rgba(66, 45, 78, 0.55);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 1000;
+}
+
+.modal {
+    position: relative;
+
+    width: 90%;
+    max-width: 600px;
+
+    max-height: 90vh;
+    overflow-y: auto;
+
+    background-color: #ffffff;
+    border-radius: 12px;
+
+    padding: 30px;
+
+    box-shadow: 0 10px 30px rgba(60, 40, 70, 0.25);
+}
+
+.modal-fechar {
+    position: absolute;
+
+    top: 10px;
+    right: 15px;
+
+    border: none;
+    background: none;
+
+    color: #72557f;
+
+    font-size: 30px;
+    cursor: pointer;
+
+    line-height: 1;
+}
+
+.formulario-usuario {
+    display: grid;
+    gap: 16px;
+}
+
+.formulario-usuario__cabecalho p {
+    margin: 0 0 7px;
+
+    color: #8d6aaa;
+
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12rem;
+    text-transform: uppercase;
+}
+
+.formulario-usuario__cabecalho h2 {
+    margin: 0;
+
+    color: #513765;
+}
+
+.campo-formulario {
+    display: grid;
+    gap: 7px;
+}
+
+.campo-formulario label {
+    color: #5f5266;
+
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
+.campo-formulario input {
+    width: 100%;
+    min-height: 46px;
+
+    padding: 11px;
+
+    border: 1px solid #d6c5dd;
+    border-radius: 8px;
+
+    background-color: #fcfaff;
+    color: #44334d;
+
+    font: inherit;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s,
+        box-shadow 0.2s,
+        background-color 0.2s;
+}
+
+.campo-formulario input::placeholder {
+    color: #aa9caf;
+}
+
+.campo-formulario input:hover {
+    border-color: #b99ac8;
+}
+
+.campo-formulario input:focus {
+    border-color: #8d6aaa;
+    background: #ffffff;
+
+    box-shadow: 0 0 0 3px rgba(141, 106, 170, 0.15);
+}
+
+.botao-cadastrar {
+    width: 100%;
+
+    min-height: 44px;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: #a8cfae;
+    color: #31583a;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: background-color 0.2s;
+}
+
+.botao-cadastrar:hover {
+    background-color: #8fbd97;
+}
+
+.sucess-snackbar {
+    position: fixed;
+    z-index: 1200;
+
+    top: 24px;
+    right: 24px;
+
+    width: min(420px, calc(100vw - 32px));
+
+    margin: 0;
+    padding: 16px 20px;
+
+    border: 1px solid #a8cfae;
+    border-left: 4px solid #78a97e;
+    border-radius: 10px;
+
+    background: #f0f8f1;
+    color: #31583a;
+
+    box-shadow: 0 10px 25px rgba(70, 100, 75, 0.18);
+
+    animation: snackbar-entrance 220ms ease-out both;
+}
+
+@keyframes snackbar-entrance {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 600px) {
+
+    .app {
+        padding: 25px 15px;
+    }
+
+    .titulo {
+        font-size: 1.7rem;
+    }
+
+    .lista-usuarios {
+        grid-template-columns: 1fr;
+    }
+
+    .card-usuario button {
+        margin-bottom: 8px;
+    }
+}
